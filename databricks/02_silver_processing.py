@@ -5,7 +5,7 @@
 # materialized in batch so the demo table is immediately queryable.
 
 from pyspark.sql import functions as F
-from pyspark.sql.types import DoubleType, LongType, StringType, StructField, StructType
+from pyspark.sql.types import StringType, StructField, StructType
 
 dbutils.widgets.text("catalog", "student_streaming")
 dbutils.widgets.text("schema", "market_demo")
@@ -20,12 +20,12 @@ tick_schema = StructType(
         StructField("event_id", StringType(), False),
         StructField("symbol", StringType(), False),
         StructField("event_time", StringType(), False),
-        StructField("price", DoubleType(), False),
-        StructField("volume", LongType(), False),
-        StructField("bid", DoubleType(), True),
-        StructField("ask", DoubleType(), True),
+        StructField("price", StringType(), False),
+        StructField("volume", StringType(), False),
+        StructField("bid", StringType(), True),
+        StructField("ask", StringType(), True),
         StructField("exchange", StringType(), True),
-        StructField("sequence_number", LongType(), True),
+        StructField("sequence_number", StringType(), True),
         StructField("producer_time", StringType(), True),
         StructField("anomaly_hint", StringType(), True),
     ]
@@ -46,6 +46,11 @@ parsed = (
 
 typed_df = (
     parsed
+    .withColumn("price", F.col("price").cast("double"))
+    .withColumn("volume", F.col("volume").cast("long"))
+    .withColumn("bid", F.col("bid").cast("double"))
+    .withColumn("ask", F.col("ask").cast("double"))
+    .withColumn("sequence_number", F.col("sequence_number").cast("long"))
     .withColumn(
         "event_time",
         F.coalesce(
@@ -127,4 +132,3 @@ display(
         """
     )
 )
-
