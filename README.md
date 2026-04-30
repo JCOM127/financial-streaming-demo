@@ -72,11 +72,12 @@ python3 -m producer.market_stream.cli \
 Run these files in Databricks in order:
 
 1. `databricks/00_setup.sql`
-2. `databricks/01_bronze_ingestion.py`
-3. `databricks/02_silver_processing.py`
-4. `databricks/03_gold_processing.py`
-5. `databricks/04_validation_queries.sql`
-6. Use `databricks/dashboard_queries.sql` to create AI/BI dashboard datasets.
+2. Optional Databricks-native source generation: `databricks/00_generate_mock_ticks.py`
+3. `databricks/01_bronze_ingestion.py`
+4. `databricks/02_silver_processing.py`
+5. `databricks/03_gold_processing.py`
+6. `databricks/04_validation_queries.sql`
+7. Use `databricks/dashboard_queries.sql` to create AI/BI dashboard datasets.
 
 Detailed click-by-click instructions are in `docs/databricks_runbook.md`.
 
