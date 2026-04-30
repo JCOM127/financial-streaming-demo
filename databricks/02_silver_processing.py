@@ -45,8 +45,8 @@ parsed = (
 
 silver_df = (
     parsed
-    .withColumn("event_time", F.to_timestamp("event_time"))
-    .withColumn("producer_time", F.to_timestamp("producer_time"))
+    .withColumn("event_time", F.to_timestamp("event_time", "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"))
+    .withColumn("producer_time", F.to_timestamp("producer_time", "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"))
     .filter(
         F.col("event_id").isNotNull()
         & F.col("symbol").isNotNull()
@@ -72,4 +72,3 @@ silver_df = (
     .trigger(availableNow=True)
     .toTable(target_table)
 )
-
