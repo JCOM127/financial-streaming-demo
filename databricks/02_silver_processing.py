@@ -1,10 +1,8 @@
 # Databricks notebook source
 # Silver processing: parse, type, deduplicate, and enrich ticks.
 #
-# For the student Databricks/serverless demo, Silver is materialized as a batch
-# overwrite from the Bronze Delta table. Bronze still demonstrates Auto Loader
-# and Structured Streaming, while this keeps the cleaned table immediately
-# queryable after each run.
+# Bronze demonstrates Auto Loader / Structured Streaming. Silver is
+# materialized in batch so the demo table is immediately queryable.
 
 from pyspark.sql import functions as F
 from pyspark.sql.types import DoubleType, LongType, StringType, StructField, StructType
@@ -129,3 +127,4 @@ display(
         """
     )
 )
+
