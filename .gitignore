@@ -1,0 +1,8 @@
+configs/local.yaml
+data/raw_ticks/*.jsonl
+data/raw_ticks/*.ndjson
+__pycache__/
+*.pyc
+.pytest_cache/
+*.md
+!README.md

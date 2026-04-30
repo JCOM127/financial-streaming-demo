@@ -1,0 +1,28 @@
+producer:
+  symbols: ["AAPL", "MSFT", "NVDA", "TSLA", "BTCUSD", "ETHUSD"]
+  exchanges: ["NASDAQ", "NYSE", "CRYPTO"]
+  random_seed: 42
+  output_dir: "data/raw_ticks"
+  file_events_per_chunk: 25
+
+anomalies:
+  price_jump_probability: 0.03
+  volume_spike_probability: 0.03
+  wide_spread_probability: 0.02
+  delayed_event_probability: 0.02
+  duplicate_probability: 0.01
+  max_delay_seconds: 120
+
+kafka:
+  bootstrap_servers: "<host:port>"
+  topic: "financial_ticks"
+  security_protocol: "SASL_SSL"
+  sasl_mechanism: "PLAIN"
+  username: "<from-env-KAFKA_USERNAME>"
+  password: "<from-env-KAFKA_PASSWORD>"
+
+databricks:
+  catalog: "student_streaming"
+  schema: "market_demo"
+  volume_root: "/Volumes/student_streaming/market_demo"
+
